@@ -1,389 +1,111 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#0A0A0F">
-    <meta name="description" content="English Mastery Roadmap: A2 a C1 en 10 meses">
-    <title>English Mastery Roadmap</title>
-    
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/felixdevim-prog/englishpath/main/english.png">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Mastery PRO</title>
 
-    <style>
-        body, html { margin: 0; padding: 0; background: #0A0A0F; -webkit-tap-highlight-color: transparent; }
-        * { box-sizing: border-box; }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #0A0A0F; }
-        ::-webkit-scrollbar-thumb { background: #1e1e2e; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #06B6D4; }
-    </style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0A0A0F">
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/felixdevim-prog/englishpath/main/english.png">
+
+<style>
+body{margin:0;background:#0A0A0F;color:#e8e8ed;font-family:Inter,Arial}
+.container{max-width:900px;margin:auto;padding:20px}
+h1{color:#06B6D4}
+.card{background:#111119;border:1px solid #1e1e2e;padding:16px;border-radius:14px;margin-bottom:12px}
+.phase-btn{padding:10px;border-radius:10px;border:1px solid #1e1e2e;background:#111119;color:#888;cursor:pointer}
+.phase-btn.active{border-color:#06B6D4;color:#06B6D4}
+button.install{background:#06B6D4;border:none;padding:12px;border-radius:10px;color:#000;font-weight:bold;cursor:pointer;width:100%}
+.progress{height:6px;background:#1e1e2e;border-radius:4px;overflow:hidden;margin-top:10px}
+.progress-bar{height:100%;background:linear-gradient(90deg,#06B6D4,#8B5CF6);width:0%}
+.check{cursor:pointer;margin-right:8px}
+</style>
 </head>
 <body>
-    <div id="root"></div>
 
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('Service Worker registrado.', reg))
-                    .catch(err => console.error('Error Service Worker', err));
-            });
-        }
-    </script>
+<div class="container">
+<h1>English Mastery PRO</h1>
+<p>A2 → C1 en 10 meses</p>
 
-    <script type="text/babel">
-        const { useState } = React;
+<div id="phases"></div>
 
-        const SCIENCE = [
-          { principle: "Repetición Espaciada", source: "Ebbinghaus (1885), Pashler et al. (2007)", desc: "Revisar vocabulario en intervalos crecientes triplica la retención vs. estudiar todo de golpe.", tool: "4000 Essential Words + Anki" },
-          { principle: "Input Comprensible (i+1)", source: "Krashen (1982), Nation (2001)", desc: "Adquieres idioma al exponerte a contenido donde entiendes 90-95%.", tool: "Busuu Premium + Podcasts" },
-          { principle: "Retrieval Practice", source: "Roediger & Butler (2011)", desc: "Intentar recordar activamente es 2-3x más efectivo que releer.", tool: "Gemini Pro + Anki" },
-          { principle: "Interleaving", source: "Lafleur (2020), CALL-EJ 2024", desc: "Mezclar tipos de práctica produce aprendizaje más profundo.", tool: "Rutina diaria mixta" },
-          { principle: "Output Forzado", source: "Swain (1985), Output Hypothesis", desc: "Hablar y escribir te obliga a notar los gaps en tu conocimiento.", tool: "Gemini Pro (conversación)" },
-          { principle: "Filtro Afectivo Bajo", source: "Krashen (1982)", desc: "Practicar con IA elimina el miedo al juicio y baja el filtro afectivo.", tool: "Gemini Pro (sin juicio)" },
-        ];
+<div class="card">
+<h3>Progreso</h3>
+<div class="progress"><div id="bar" class="progress-bar"></div></div>
+<p id="progressText"></p>
+</div>
 
-        const PHASES = [
-          {
-            id: 1, title: "CIMIENTOS", subtitle: "A2 → A2+", duration: "Meses 1-2", color: "#06B6D4", darkColor: "#083344",
-            icon: "🧱", targetVocab: "1,000-1,500 palabras", hoursPerDay: "1.5-2 hrs/día",
-            description: "Solidificar tu base. Entender el sistema del inglés y construir vocabulario funcional.",
-            weeklySchedule: {
-              title: "Rutina Diaria (1.5-2 hrs)",
-              blocks: [
-                { time: "30 min", activity: "Busuu Premium", detail: "1-2 lecciones del curso A2. Completar TODOS los ejercicios incluyendo speaking." },
-                { time: "20 min", activity: "4000 Essential Words (Book 1)", detail: "1 unidad = 20 palabras. Leer definición + oración ejemplo. Leer historia en voz alta." },
-                { time: "15 min", activity: "Anki", detail: "Flashcards de las 20 palabras. Frente = inglés. Atrás = definición en inglés + ejemplo." },
-                { time: "20 min", activity: "Listening Pasivo", detail: "Podcasts cortos con transcripción. 1x sin leer, 1x leyendo." },
-                { time: "15 min", activity: "Gemini Pro (Output)", detail: "Conversación simple. Pedir correcciones suaves." },
-              ]
-            },
-            milestones: [
-              "Semana 2: Completar Book 1 (400 palabras nuevas).",
-              "Semana 4: Completar nivel A2 en Busuu.",
-              "Semana 6: Conversación básica de 3-5 min con Gemini.",
-              "Semana 8: Book 2 completado. 800 palabras dominadas.",
-            ],
-            geminiPrompts: [
-              { label: "Conversación Guiada", prompt: "I'm learning English at A2 level. Let's practice ordering food at a restaurant. Correct my grammar mistakes gently." },
-              { label: "Vocabulary Quiz", prompt: "Quiz me on these 20 words: [words]. Give sentences with blanks." },
-              { label: "Grammar Detective", prompt: "I'll write 5 sentences. Find ALL mistakes and explain them simply." },
-            ],
-            coursera: "English for Career Development (UPenn) — Cubre inglés para entrevistas y workplace.",
-            resources: [
-              "Anki (ankiweb.net)",
-              "English Learning for Curious Minds Podcast",
-              "Youglish.com"
-            ]
-          },
-          {
-            id: 2, title: "DESPEGUE", subtitle: "A2+ → B1", duration: "Meses 3-4", color: "#8B5CF6", darkColor: "#2E1065",
-            icon: "🚀", targetVocab: "2,000-2,500 palabras", hoursPerDay: "2-2.5 hrs/día",
-            description: "El salto más importante. Pasar de 'entiendo algo' a 'puedo comunicarme'.",
-            weeklySchedule: {
-              title: "Rutina Diaria (2-2.5 hrs)",
-              blocks: [
-                { time: "30 min", activity: "Busuu Premium — Nivel B1", detail: "Empezar curso B1. Usar AI Conversations." },
-                { time: "20 min", activity: "4000 Words (Books 3-4)", detail: "1 unidad/día. Reescribir la historia con propias palabras." },
-                { time: "15 min", activity: "Anki Review", detail: "Mantenimiento del algoritmo SRS + 20 nuevas." },
-                { time: "25 min", activity: "Immersive Listening", detail: "YouTube (English with Lucy). Series en inglés con subtítulos en INGLÉS." },
-                { time: "20 min", activity: "Gemini Pro", detail: "Simular escenarios de workplace. Mínimo 10 turnos." },
-                { time: "20 min", activity: "Coursera", detail: "1 lección/día para mejorar comunicación estructurada." },
-              ]
-            },
-            milestones: [
-              "Semana 10: 1,200 palabras acumuladas en Anki.",
-              "Semana 12: Conversación de 10 min sin pausas largas.",
-              "Semana 16: Pasar test placement B1. Hablar de intereses sin preparar.",
-            ],
-            geminiPrompts: [
-              { label: "Call Center Sim", prompt: "Act as a customer. I'm the agent. Realistic problem. Rate politeness, clarity, grammar." },
-              { label: "Debate Estructurado", prompt: "Debate: Remote work vs Office. Correct my connectors (however, furthermore)." },
-              { label: "Storytelling", prompt: "I'll tell a story. Ask 3 follow-up questions, point out patterns, and retell it naturally." },
-            ],
-            coursera: "Improve Your English Communication Skills (Georgia Tech).",
-            resources: [
-              "English with Lucy (YouTube)",
-              "TED Talks",
-              "Write & Improve (Cambridge)"
-            ]
-          },
-          {
-            id: 3, title: "ACELERACIÓN", subtitle: "B1 → B2", duration: "Meses 5-7", color: "#F59E0B", darkColor: "#451A03",
-            icon: "⚡", targetVocab: "3,000-3,500 palabras", hoursPerDay: "2-3 hrs/día",
-            description: "De 'comunicarse' a 'trabajar'. B2 es el mínimo para roles profesionales.",
-            weeklySchedule: {
-              title: "Rutina Diaria (2-3 hrs)",
-              blocks: [
-                { time: "30 min", activity: "Busuu Premium — Nivel B2", detail: "Business English. AI Conversations en cada lección." },
-                { time: "20 min", activity: "4000 Words (Books 5-6)", detail: "Escribir párrafos con las palabras del día." },
-                { time: "15 min", activity: "Anki (Sentence Mining)", detail: "Tarjetas con oraciones completas sacadas de material real." },
-                { time: "30 min", activity: "Deep Listening", detail: "Transcribir segmentos de 5 min y comparar." },
-                { time: "30 min", activity: "Workplace Simulation", detail: "Entrevistas, presentaciones, quejas de clientes." },
-                { time: "20 min", activity: "Coursera", detail: "Business English for Non-Native Speakers." },
-              ]
-            },
-            milestones: [
-              "Mes 5: Entender 85% de TED Talks sin subtítulos.",
-              "Mes 6: Entrevista simulada de 20 min con rating 7+/10.",
-              "Mes 7: Pasar B2 en Busuu. Explicar conceptos técnicos en inglés.",
-            ],
-            geminiPrompts: [
-              { label: "Entrevista Laboral", prompt: "Conduct a job interview for a Data Analyst. Behavioral + technical. Give detailed feedback." },
-              { label: "Meeting Simulation", prompt: "I'm presenting data. Ask questions, challenge conclusions, rate my business English." },
-              { label: "Difficult Customer", prompt: "Act as an angry customer. Test my empathy and de-escalation skills." },
-            ],
-            coursera: "Business English for Non-Native Speakers (Hong Kong PolyU).",
-            resources: [
-              "Business English Pod",
-              "The Moth Podcast",
-              "Grammarly"
-            ]
-          },
-          {
-            id: 4, title: "DOMINIO", subtitle: "B2 → C1", duration: "Meses 8-10", color: "#10B981", darkColor: "#052E16",
-            icon: "👑", targetVocab: "4,000+ palabras", hoursPerDay: "2-3 hrs/día",
-            description: "El inglés deja de ser un idioma que estudias y se convierte en uno que usas.",
-            weeklySchedule: {
-              title: "Rutina Diaria (2-3 hrs)",
-              blocks: [
-                { time: "30 min", activity: "Inmersión Total", detail: "Consumir contenido REAL de tu nicho (tech/trading)." },
-                { time: "20 min", activity: "Anki Mantenimiento", detail: "Solo vocabulario especializado." },
-                { time: "30 min", activity: "Shadowing", detail: "Escuchar e imitar entonación nativa simultáneamente." },
-                { time: "30 min", activity: "Gemini Nivel Nativo", detail: "Debates complejos. NO simplificar lenguaje. Sarcasmo, idioms." },
-                { time: "20 min", activity: "Escritura Profesional", detail: "Redactar emails formales y usar Grammarly." },
-                { time: "20 min", activity: "Coursera Capstone", detail: "Foros y cursos íntegramente en inglés." },
-              ]
-            },
-            milestones: [
-              "Mes 8: Entender 95%+ de conversaciones profesionales.",
-              "Mes 9: Escribir emails sin errores. Mock interview con rating 8+/10.",
-              "Mes 10: Aplicar a posiciones remotas. Test EF SET completado.",
-            ],
-            geminiPrompts: [
-              { label: "Conversación Nativa", prompt: "Let's talk about AI. Do NOT simplify your English. Use idioms." },
-              { label: "Impromptu Speaking", prompt: "Give me a professional topic. I have 30s to prep, 2 mins to speak. Evaluate me." },
-              { label: "Accent Coach", prompt: "I'll read a text. Mark stressed syllables, explain rhythm, give tongue twisters." },
-            ],
-            coursera: "Academic English Writing (UC Irvine).",
-            resources: [
-              "EF SET (Test de nivel oficial gratuito)",
-              "Reddit r/EnglishLearning",
-              "Shadowing (YouTube)"
-            ]
-          }
-        ];
+<button class="install" onclick="installApp()">Instalar App</button>
+</div>
 
-        function ScienceCard({ s, isOpen, onToggle }) {
-          return (
-            <div style={{ background:"#111119", borderRadius:12, border:`1px solid ${isOpen?"#06B6D4":"#1e1e2e"}`, overflow:"hidden", transition:".3s" }}>
-              <button onClick={onToggle} style={{ width:"100%", display:"flex", alignItems:"center", justifyContent:"space-between", padding:"12px 14px", background:"transparent", border:"none", cursor:"pointer", color:"#e8e8ed", textAlign:"left" }}>
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontSize:14, fontWeight:700 }}>{s.principle}</div>
-                  <div style={{ fontSize:10, color:"#06B6D4", fontFamily:"'JetBrains Mono',monospace", marginTop:2 }}>{s.source}</div>
-                </div>
-                <span style={{ color:"#06B6D4", fontSize:18, transform:isOpen?"rotate(45deg)":"none", transition:".3s", flexShrink: 0, marginLeft: 8 }}>+</span>
-              </button>
-              {isOpen && (
-                <div style={{ padding:"0 14px 14px" }}>
-                  <p style={{ fontSize:13, color:"#b0b0b8", lineHeight:1.6, margin:"0 0 8px" }}>{s.desc}</p>
-                  <div style={{ fontSize:11, color:"#F59E0B", background:"rgba(245,158,11,.08)", padding:"8px 10px", borderRadius:8, fontFamily:"'JetBrains Mono',monospace" }}>
-                    🛠 {s.tool}
-                  </div>
-                </div>
-              )}
-            </div>
-          );
-        }
+<script>
+const phasesData=[
+{title:"Fase 1: Cimientos",tasks:["Busuu diario","20 palabras","Anki","Listening","Hablar con IA"]},
+{title:"Fase 2: Despegue",tasks:["B1 Busuu","Podcasts","Conversación","Coursera","Series en inglés"]},
+{title:"Fase 3: Aceleración",tasks:["B2","Entrevistas","Writing","Podcasts avanzados","Trabajo simulado"]},
+{title:"Fase 4: Dominio",tasks:["Inmersión total","Shadowing","Debates","Emails","Nivel nativo"]}
+];
 
-        function PromptCard({ p }) {
-          return (
-            <div style={{ background:"rgba(168,85,247,.06)", borderLeft:"3px solid #a855f7", borderRadius:"0 10px 10px 0", padding:"14px 16px", marginBottom:10 }}>
-              <div style={{ fontSize:9, fontWeight:700, color:"#a855f7", letterSpacing:1.5, marginBottom:6, fontFamily:"'JetBrains Mono',monospace" }}>🤖 {p.label}</div>
-              <div style={{ fontSize:11.5, lineHeight:1.65, color:"#c8b4ff", fontFamily:"'JetBrains Mono',monospace", background:"rgba(0,0,0,.25)", padding:12, borderRadius:8, whiteSpace:"pre-wrap" }}>{p.prompt}</div>
-            </div>
-          );
-        }
+let progress=JSON.parse(localStorage.getItem('progress')||"{}");
 
-        function PhaseView({ phase }) {
-          const [openSections, setOpenSections] = useState({});
-          const toggle = (key) => setOpenSections(p => ({ ...p, [key]: !p[key] }));
+function render(){
+const container=document.getElementById('phases');
+container.innerHTML='';
+let total=0,done=0;
 
-          const Section = ({ title, sKey, color, children }) => (
-            <div style={{ background:"#111119", borderRadius:14, border:`1px solid ${openSections[sKey]?color:"#1e1e2e"}`, overflow:"hidden", marginBottom:10, transition:".3s" }}>
-              <button onClick={() => toggle(sKey)} style={{ width:"100%", display:"flex", justifyContent:"space-between", alignItems:"center", padding:"14px 16px", background:"transparent", border:"none", cursor:"pointer", color:"#e8e8ed", textAlign:"left" }}>
-                <span style={{ fontSize:14, fontWeight:700 }}>{title}</span>
-                <span style={{ color, fontSize:18, transform:openSections[sKey]?"rotate(45deg)":"none", transition:".3s" }}>+</span>
-              </button>
-              {openSections[sKey] && <div style={{ padding:"0 16px 16px" }}>{children}</div>}
-            </div>
-          );
+phasesData.forEach((phase,i)=>{
+const div=document.createElement('div');
+div.className='card';
 
-          return (
-            <div>
-              <Section title={`📅 ${phase.weeklySchedule.title}`} sKey="schedule" color={phase.color}>
-                {phase.weeklySchedule.blocks.map((b, i) => (
-                  <div key={i} style={{ display:"flex", gap:10, marginBottom:12, paddingBottom:12, borderBottom:i < phase.weeklySchedule.blocks.length-1?"1px solid #1e1e2e":"none" }}>
-                    <div style={{ minWidth:56, fontSize:11, fontWeight:700, color:phase.color, fontFamily:"'JetBrains Mono',monospace", paddingTop:2 }}>{b.time}</div>
-                    <div>
-                      <div style={{ fontSize:13, fontWeight:700, marginBottom:3 }}>{b.activity}</div>
-                      <div style={{ fontSize:12, color:"#a0a0b0", lineHeight:1.6 }}>{b.detail}</div>
-                    </div>
-                  </div>
-                ))}
-              </Section>
+div.innerHTML=`<h2>${phase.title}</h2>`;
 
-              <Section title="🤖 Prompts para Gemini Pro" sKey="prompts" color="#A855F7">
-                {phase.geminiPrompts.map((p, i) => <PromptCard key={i} p={p} />)}
-              </Section>
+phase.tasks.forEach((t,j)=>{
+const id=`p${i}_${j}`;
+if(progress[id]) done++;
+total++;
 
-              <Section title="🎯 Milestones (Checkpoints)" sKey="milestones" color="#10B981">
-                {phase.milestones.map((m, i) => (
-                  <div key={i} style={{ display:"flex", gap:10, marginBottom:10, alignItems:"flex-start" }}>
-                    <div style={{ minWidth:22, height:22, borderRadius:"50%", border:"2px solid #10b981", display:"flex", alignItems:"center", justifyContent:"center", fontSize:10, color:"#10b981", fontWeight:700, marginTop:1 }}>{i+1}</div>
-                    <div style={{ fontSize:12.5, color:"#c0c0c8", lineHeight:1.6 }}>{m}</div>
-                  </div>
-                ))}
-              </Section>
+const row=document.createElement('div');
+row.innerHTML=`
+<input type="checkbox" class="check" ${progress[id]?"checked":""} onclick="toggle('${id}')">
+${t}`;
+div.appendChild(row);
+});
 
-              <Section title="🎓 Coursera Plus" sKey="coursera" color="#2563EB">
-                <div style={{ fontSize:13, color:"#93c5fd", lineHeight:1.7, background:"rgba(37,99,246,.08)", padding:12, borderRadius:10 }}>{phase.coursera}</div>
-              </Section>
+container.appendChild(div);
+});
 
-              <Section title="🔗 Recursos Gratuitos" sKey="resources" color="#F59E0B">
-                {phase.resources.map((r, i) => (
-                  <div key={i} style={{ fontSize:12, color:"#fcd34d", lineHeight:1.6, marginBottom:6, paddingLeft:12, borderLeft:"2px solid rgba(245,158,11,.3)" }}>{r}</div>
-                ))}
-              </Section>
-            </div>
-          );
-        }
+let percent=Math.round((done/total)*100)||0;
+document.getElementById('bar').style.width=percent+'%';
+document.getElementById('progressText').innerText=percent+"% completado";
+}
 
-        function EnglishRoadmap() {
-          const [activePhase, setActivePhase] = useState(0);
-          const [showScience, setShowScience] = useState(false);
-          const [openScience, setOpenScience] = useState({});
+function toggle(id){
+progress[id]=!progress[id];
+localStorage.setItem('progress',JSON.stringify(progress));
+render();
+}
 
-          const phase = PHASES[activePhase];
+render();
 
-          return (
-            <div style={{ paddingBottom:"70px" }}>
-              {/* HEADER */}
-              <div style={{ padding:"36px 16px 28px", textAlign:"center", borderBottom:"1px solid #1e1e2e", background:"linear-gradient(180deg,#0F0F1A,#0A0A0F)" }}>
-                <div style={{ fontSize:9, letterSpacing:5, color:"#6b6b80", fontWeight:700, fontFamily:"'JetBrains Mono',monospace", marginBottom:14 }}>ENGLISH MASTERY · 2026</div>
-                <h1 style={{ fontSize:"clamp(22px,5vw,34px)", fontWeight:800, margin:"0 0 6px", lineHeight:1.15, letterSpacing:"-0.5px" }}>
-                  A2 → <span style={{ color:"#06B6D4" }}>C1</span> en 10 Meses
-                </h1>
-                <p style={{ fontSize:13, color:"#6b6b80", margin:"8px auto 0", maxWidth:420, lineHeight:1.5 }}>
-                  Estrategia comprobada con Busuu, Anki y simulaciones IA.
-                </p>
+// INSTALL
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt',e=>{
+e.preventDefault();
+deferredPrompt=e;
+});
 
-                <div style={{ display:"flex", justifyContent:"center", gap:8, marginTop:20, flexWrap:"wrap" }}>
-                  {["Busuu Premium","4000 Words","IA Prompts","Coursera+","Anki"].map(t => (
-                    <span key={t} style={{ fontSize:10, fontWeight:600, padding:"5px 12px", borderRadius:20, background:"rgba(6,182,212,.08)", border:"1px solid rgba(6,182,212,.2)", color:"#06B6D4", fontFamily:"'JetBrains Mono',monospace" }}>{t}</span>
-                  ))}
-                </div>
-              </div>
+function installApp(){
+if(deferredPrompt){
+deferredPrompt.prompt();
+}
+}
 
-              {/* SCIENCE */}
-              <div style={{ padding:"16px 16px 8px" }}>
-                <button onClick={() => setShowScience(!showScience)} style={{ width:"100%", display:"flex", justifyContent:"space-between", alignItems:"center", padding:"14px 16px", borderRadius:14, background:"#111119", border:"1px solid #1e1e2e", cursor:"pointer", color:"#e8e8ed", textAlign:"left" }}>
-                  <div>
-                    <div style={{ fontSize:15, fontWeight:700 }}>🔬 Base Científica</div>
-                    <div style={{ fontSize:11, color:"#6b6b80", marginTop:2 }}>6 principios respaldados por investigación</div>
-                  </div>
-                  <span style={{ color:"#888", fontSize:18, transform:showScience?"rotate(45deg)":"none", transition:".3s" }}>+</span>
-                </button>
-                {showScience && (
-                  <div style={{ display:"flex", flexDirection:"column", gap:8, marginTop:10 }}>
-                    {SCIENCE.map((s, i) => (
-                      <ScienceCard key={i} s={s} isOpen={!!openScience[i]} onToggle={() => setOpenScience(p => ({ ...p, [i]: !p[i] }))} />
-                    ))}
-                  </div>
-                )}
-              </div>
+// SERVICE WORKER
+if('serviceWorker' in navigator){
+navigator.serviceWorker.register('sw.js');
+}
+</script>
 
-              {/* TABS */}
-              <div style={{ display:"flex", gap:6, padding:"16px", overflowX:"auto", WebkitOverflowScrolling:"touch", scrollbarWidth:"none" }}>
-                {PHASES.map((p, i) => (
-                  <button key={p.id} onClick={() => setActivePhase(i)} style={{
-                    flex:"0 0 auto", display:"flex", flexDirection:"column", alignItems:"center",
-                    padding:"12px 14px", borderRadius:12, minWidth:78,
-                    background: i === activePhase ? p.darkColor : "#111119",
-                    border: `1.5px solid ${i === activePhase ? p.color : "#1e1e2e"}`,
-                    cursor:"pointer", color: i === activePhase ? p.color : "#6b6b80", transition:".25s"
-                  }}>
-                    <span style={{ fontSize:20, marginBottom:4 }}>{p.icon}</span>
-                    <span style={{ fontSize:10, fontWeight:700, fontFamily:"'JetBrains Mono',monospace" }}>F{p.id}</span>
-                  </button>
-                ))}
-              </div>
-
-              <div style={{ padding:"4px 16px 16px" }}>
-                <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:8 }}>
-                  <div style={{ width:48, height:48, borderRadius:12, background:phase.darkColor, border:`1.5px solid ${phase.color}`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:24 }}>{phase.icon}</div>
-                  <div>
-                    <h2 style={{ margin:0, fontSize:20, fontWeight:800, letterSpacing:"-0.5px" }}>Fase {phase.id}: {phase.title}</h2>
-                    <div style={{ fontSize:12, color:phase.color, fontWeight:600, fontFamily:"'JetBrains Mono',monospace" }}>{phase.subtitle} · {phase.duration}</div>
-                  </div>
-                </div>
-                <p style={{ fontSize:13, color:"#a0a0b0", lineHeight:1.6, margin:"8px 0 0" }}>{phase.description}</p>
-                <div style={{ display:"flex", gap:8, marginTop:12 }}>
-                  <div style={{ flex:1, background:"rgba(6,182,212,.06)", border:"1px solid rgba(6,182,212,.15)", borderRadius:10, padding:"10px 12px", textAlign:"center" }}>
-                    <div style={{ fontSize:9, fontWeight:700, color:"#06B6D4", letterSpacing:1, fontFamily:"'JetBrains Mono',monospace" }}>VOCAB TARGET</div>
-                    <div style={{ fontSize:14, fontWeight:700, marginTop:4 }}>{phase.targetVocab}</div>
-                  </div>
-                  <div style={{ flex:1, background:"rgba(245,158,11,.06)", border:"1px solid rgba(245,158,11,.15)", borderRadius:10, padding:"10px 12px", textAlign:"center" }}>
-                    <div style={{ fontSize:9, fontWeight:700, color:"#F59E0B", letterSpacing:1, fontFamily:"'JetBrains Mono',monospace" }}>DEDICACIÓN</div>
-                    <div style={{ fontSize:14, fontWeight:700, marginTop:4 }}>{phase.hoursPerDay}</div>
-                  </div>
-                </div>
-              </div>
-
-              <div style={{ padding:"0 16px 30px" }}><PhaseView phase={phase} /></div>
-
-              {/* RULES */}
-              <div style={{ padding:"0 16px 30px" }}>
-                <div style={{ background:"#111119", borderRadius:14, border:"1px solid #1e1e2e", padding:18 }}>
-                  <div style={{ fontSize:9, letterSpacing:3, color:"#6b6b80", fontWeight:700, fontFamily:"'JetBrains Mono',monospace", marginBottom:10 }}>REGLAS DE ORO</div>
-                  {[
-                    { icon:"🧠", rule:"Nunca traduzcas mentalmente", detail:"Piensa imagen → palabra." },
-                    { icon:"📱", rule:"Cambia TODO a inglés", detail:"Teléfono, PC, redes sociales." },
-                    { icon:"🎯", rule:"1 unidad diaria", detail:"20 palabras al día marcan la diferencia." },
-                    { icon:"🗣️", rule:"Habla TODOS los días", detail:"El output afianza el conocimiento." }
-                  ].map((r, i) => (
-                    <div key={i} style={{ display:"flex", gap:10, marginBottom:12, paddingBottom:12, borderBottom:i<3?"1px solid #1e1e2e":"none" }}>
-                      <span style={{ fontSize:18 }}>{r.icon}</span>
-                      <div>
-                        <div style={{ fontSize:13, fontWeight:700 }}>{r.rule}</div>
-                        <div style={{ fontSize:11.5, color:"#6b6b80", lineHeight:1.5 }}>{r.detail}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* PROGRESS BAR STICKY */}
-              <div style={{ position:"fixed", bottom:0, left:0, right:0, background:"#0A0A0F", borderTop:"1px solid #1e1e2e", padding:"16px", display:"flex", alignItems:"center", gap:10, zIndex:100 }}>
-                <div style={{ fontSize:11, color:"#6b6b80", fontFamily:"'JetBrains Mono',monospace", whiteSpace:"nowrap" }}>FASE {activePhase+1}/4</div>
-                <div style={{ flex:1, height:4, background:"#1e1e2e", borderRadius:2, overflow:"hidden" }}>
-                  <div style={{ height:"100%", borderRadius:2, width:`${((activePhase+1)/4)*100}%`, background:`linear-gradient(90deg,#06B6D4,${phase.color})`, transition:"width .4s" }} />
-                </div>
-                <div style={{ fontSize:11, color:phase.color, fontWeight:700, fontFamily:"'JetBrains Mono',monospace" }}>{["Cimientos","Despegue","Aceleración","Dominio"][activePhase]}</div>
-              </div>
-            </div>
-          );
-        }
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<EnglishRoadmap />);
-    </script>
 </body>
 </html>
