@@ -9,76 +9,146 @@
 <meta name="theme-color" content="#0A0A0F">
 <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/felixdevim-prog/englishpath/main/english.png">
 
-<style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+<style>
 body{
   margin:0;
-  background:#0A0A0F;
+  background:linear-gradient(180deg,#0A0A0F,#050507);
   color:#e8e8ed;
-  font-family:Inter,Arial;
+  font-family:'Inter',sans-serif;
 }
 
-/* 👇 PEGA ESTO AQUÍ */
-p, span, div, h1, h2, h3, h4, label {
-  color: #e8e8ed;
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
 }
 
-input {
-  color: #e8e8ed;
+h1{
+  font-size:28px;
+  font-weight:800;
+  color:#06B6D4;
+  margin-bottom:5px;
 }
 
-/* tus otros estilos siguen abajo */
-.container{max-width:900px;margin:auto;padding:20px}
-.card{background:#111119;border:1px solid #1e1e2e;padding:16px;border-radius:14px;margin-bottom:12px}
-
-
-
-
-
-
-
-
-  
-body{margin:0;background:#0A0A0F;color:#e8e8ed;font-family:Inter,Arial}
-.container{max-width:900px;margin:auto;padding:20px}
-h1{color:#06B6D4}
-.card{background:#111119;border:1px solid #1e1e2e;padding:16px;border-radius:14px;margin-bottom:12px}
-.phase-btn{padding:10px;border-radius:10px;border:1px solid #1e1e2e;background:#111119;color:#888;cursor:pointer}
-.phase-btn.active{border-color:#06B6D4;color:#06B6D4}
-button.install{background:#06B6D4;border:none;padding:12px;border-radius:10px;color:#000;font-weight:bold;cursor:pointer;width:100%}
-.progress{height:6px;background:#1e1e2e;border-radius:4px;overflow:hidden;margin-top:10px}
-.progress-bar{height:100%;background:linear-gradient(90deg,#06B6D4,#8B5CF6);width:0%}
-.check{cursor:pointer;margin-right:8px}
-
-* {
-  color: #e8e8ed !important;
+p{
+  color:#a0a0b0;
 }
-  
+
+.card{
+  background:rgba(255,255,255,0.03);
+  backdrop-filter: blur(12px);
+  border:1px solid rgba(255,255,255,0.05);
+  padding:18px;
+  border-radius:18px;
+  margin-bottom:14px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.4);
+  transition:0.25s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  border-color:#06B6D4;
+}
+
+h2{
+  font-size:18px;
+  margin-bottom:10px;
+}
+
+.task{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px;
+  border-radius:10px;
+  transition:0.2s;
+}
+
+.task:hover{
+  background:rgba(255,255,255,0.05);
+}
+
+input[type="checkbox"]{
+  width:18px;
+  height:18px;
+  accent-color:#06B6D4;
+  cursor:pointer;
+}
+
+.progress-box{
+  margin-top:10px;
+}
+
+.progress{
+  height:8px;
+  background:#1e1e2e;
+  border-radius:6px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  background:linear-gradient(90deg,#06B6D4,#8B5CF6);
+  width:0%;
+  transition:0.4s;
+}
+
+button.install{
+  margin-top:20px;
+  background:linear-gradient(135deg,#06B6D4,#8B5CF6);
+  border:none;
+  padding:14px;
+  border-radius:14px;
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+  width:100%;
+  font-size:15px;
+  box-shadow:0 10px 20px rgba(6,182,212,0.3);
+  transition:0.25s;
+}
+
+button.install:hover{
+  transform:scale(1.03);
+}
+
+.header{
+  margin-bottom:20px;
+}
+
 </style>
 </head>
 <body>
 
 <div class="container">
-<h1>English Mastery PRO</h1>
-<p>A2 → C1 en 10 meses</p>
+
+<div class="header">
+<h1>English Mastery</h1>
+<p>A2 → C1 roadmap inteligente</p>
+</div>
 
 <div id="phases"></div>
 
 <div class="card">
-<h3>Progreso</h3>
+<h2>📊 Progreso</h2>
+<div class="progress-box">
 <div class="progress"><div id="bar" class="progress-bar"></div></div>
 <p id="progressText"></p>
 </div>
+</div>
 
-<button class="install" onclick="installApp()">Instalar App</button>
+<button class="install" onclick="installApp()">📲 Instalar App</button>
+
 </div>
 
 <script>
 const phasesData=[
-{title:"Fase 1: Cimientos",tasks:["Busuu diario","20 palabras","Anki","Listening","Hablar con IA"]},
-{title:"Fase 2: Despegue",tasks:["B1 Busuu","Podcasts","Conversación","Coursera","Series en inglés"]},
-{title:"Fase 3: Aceleración",tasks:["B2","Entrevistas","Writing","Podcasts avanzados","Trabajo simulado"]},
-{title:"Fase 4: Dominio",tasks:["Inmersión total","Shadowing","Debates","Emails","Nivel nativo"]}
+{title:"🧱 Fase 1: Cimientos",tasks:["Busuu diario","20 palabras","Anki","Listening","Hablar con IA"]},
+{title:"🚀 Fase 2: Despegue",tasks:["B1 Busuu","Podcasts","Conversación","Coursera","Series en inglés"]},
+{title:"⚡ Fase 3: Aceleración",tasks:["B2","Entrevistas","Writing","Podcasts avanzados","Trabajo simulado"]},
+{title:"👑 Fase 4: Dominio",tasks:["Inmersión total","Shadowing","Debates","Emails","Nivel nativo"]}
 ];
 
 let progress=JSON.parse(localStorage.getItem('progress')||"{}");
@@ -100,9 +170,11 @@ if(progress[id]) done++;
 total++;
 
 const row=document.createElement('div');
+row.className='task';
 row.innerHTML=`
-<input type="checkbox" class="check" ${progress[id]?"checked":""} onclick="toggle('${id}')">
-${t}`;
+<input type="checkbox" ${progress[id]?"checked":""} onclick="toggle('${id}')">
+<span>${t}</span>`;
+
 div.appendChild(row);
 });
 
@@ -122,7 +194,6 @@ render();
 
 render();
 
-// INSTALL
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt',e=>{
 e.preventDefault();
@@ -135,7 +206,6 @@ deferredPrompt.prompt();
 }
 }
 
-// SERVICE WORKER
 if('serviceWorker' in navigator){
 navigator.serviceWorker.register('sw.js');
 }
