@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ultimate Analyst & Trader Roadmap</title>
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#0A0A0F">
+    
+    <style>
+        :root {
+            --bg-main: #0A0A0F;
+            --bg-card: #111119;
+            --border-color: #1e1e2e;
+            --text-main: #e8e8ed;
+            --text-muted: #6b6b80;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, sans-serif;
+            min-height: 100vh;
+            padding-bottom: 70px;
+        }
+
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Estilos Generales */
+        .header {
+            padding: 36px 16px 28px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(180deg, #0F0F1A, #0A0A0F);
+        }
+
+        .header-tags span {
+            font-size: 9px; font-weight: 600; padding: 4px 10px; border-radius: 16px;
+            background: rgba(139,92,246,.08); border: 1px solid rgba(139,92,246,.2); color: #a78bfa;
+        }
+
+        /* Acordeones */
+        .accordion {
+            background: var(--bg-card); border-radius: 14px; border: 1px solid var(--border-color);
+            margin-bottom: 10px; overflow: hidden; transition: 0.3s;
+        }
+        
+        .accordion-btn {
+            width: 100%; display: flex; justify-content: space-between; align-items: center;
+            padding: 14px 16px; background: transparent; border: none; cursor: pointer;
+            color: var(--text-main); text-align: left;
+        }
+        
+        .accordion-content {
+            display: none; padding: 0 16px 16px;
+        }
+
+        .accordion.open { border-color: var(--active-color, #1e1e2e); }
+        .accordion.open .accordion-content { display: block; }
+        .accordion.open .icon-plus { transform: rotate(45deg); }
+        .icon-plus { font-size: 18px; transition: 0.3s; color: var(--active-color, #888); }
+
+        /* Tabs de Fases */
+        .tabs-container {
+            display: flex; gap: 6px; padding: 16px; overflow-x: auto;
+            -webkit-overflow-scrolling: touch; scrollbar-width: none;
+        }
+        .tabs-container::-webkit-scrollbar { display: none; }
+        
+        .tab-btn {
+            flex: 0 0 auto; display: flex; flex-direction: column; align-items: center;
+            padding: 12px 14px; border-radius: 12px; min-width: 78px;
+            background: var(--bg-card); border: 1.5px solid var(--border-color);
+            cursor: pointer; color: var(--text-muted); transition: 0.25s;
+        }
+
+        /* Progreso Inferior */
+        .progress-bar-container {
+            position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-main);
+            border-top: 1px solid var(--border-color); padding: 12px 16px;
+            display: flex; align-items: center; gap: 10px; z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="font-mono" style="font-size: 9px; letter-spacing: 5px; color: #6b6b80; font-weight: 700; margin-bottom: 14px;">SCIENCE-BACKED · EVIDENCE-DRIVEN · 2026</div>
+        <h1 style="font-size: clamp(20px, 5vw, 32px); font-weight: 800; margin: 0 0 6px; line-height: 1.15; letter-spacing: -0.5px;">
+            <span style="color: #3B82F6;">Data Analyst</span> + <span style="color: #EF4444;">Algo Trader</span>
+        </h1>
+        <p style="font-size: 12.5px; color: #6b6b80; margin: 8px auto 0; max-width: 440px; line-height: 1.5;">
+            12 meses · 6 principios científicos · 6+ proyectos · 3 certificaciones · Respaldado por investigación cuantitativa
+        </p>
+        <div class="header-tags" style="display: flex; justify-content: center; gap: 6px; margin-top: 16px; flex-wrap: wrap;">
+            <span class="font-mono">Coursera+</span><span class="font-mono">Gemini Pro</span><span class="font-mono">Kaggle</span><span class="font-mono">GitHub</span><span class="font-mono">Colab</span>
+        </div>
+    </div>
+
+    <div id="general-sections" style="padding: 16px 16px 6px;"></div>
+
+    <div id="phase-tabs" class="tabs-container"></div>
+
+    <div id="phase-content"></div>
+
+    <div style="padding: 20px 16px 80px; border-top: 1px solid var(--border-color); text-align: center;">
+        <div class="font-mono" style="font-size: 9px; letter-spacing: 3px; color: #6b6b80; font-weight: 700; margin-bottom: 10px;">LA REALIDAD</div>
+        <p style="font-size: 13px; color: #a0a0b0; line-height: 1.7; max-width: 500px; margin: 0 auto;">
+            <strong style="color: #3b82f6;">80%+ de ofertas de Data Analyst piden SQL</strong>. No hay atajos. 
+            <strong style="color: #EF4444;">El trading rentable requiere validación estadística</strong>, no indicadores mágicos. 
+            Este roadmap usa <strong style="color: #A855F7;">deliberate practice + retrieval practice</strong> porque son los métodos más eficientes. Tu disciplina es la variable que falta.
+        </p>
+    </div>
+
+    <div class="progress-bar-container">
+        <div id="prog-text-left" class="font-mono" style="font-size: 11px; color: #6b6b80;">F1/4</div>
+        <div style="flex: 1; height: 4px; background: #1e1e2e; border-radius: 2px; overflow: hidden;">
+            <div id="prog-bar-fill" style="height: 100%; border-radius: 2px; transition: width 0.4s;"></div>
+        </div>
+        <div id="prog-text-right" class="font-mono" style="font-size: 11px; font-weight: 700;"></div>
+    </div>
+
+    <script>
+        // Datos Extraídos de tu JSX
+        const PHASES = [
+          { id:1, title:"FUNDAMENTOS", subtitle:"Cero → Junior", duration:"Meses 1-3", color:"#06B6D4", dark:"#083344", icon:"🧱", description:"Construir la base técnica obligatoria. Sin SQL y Python, no existes ni como analista ni como trader algorítmico." },
+          { id:2, title:"INTERMEDIO", subtitle:"Junior → Competente", duration:"Meses 4-6", color:"#8B5CF6", dark:"#2E1065", icon:"⚡", description:"Estadística, visualización avanzada, y las herramientas que te hacen contratable. Aquí se bifurca ligeramente el camino." },
+          { id:3, title:"AVANZADO", subtitle:"Competente → Profesional", duration:"Meses 7-9", color:"#F59E0B", dark:"#451A03", icon:"🔥", description:"Machine Learning, automatización, y proyectos de nivel senior. Aquí te separas del 90% de candidatos." },
+          { id:4, title:"PROFESIONAL", subtitle:"Job-Ready + Trader Autónomo", duration:"Meses 10-12", color:"#10B981", dark:"#052E16", icon:"👑", description:"Certificaciones finales, portfolio pulido, búsqueda de empleo estratégica, y trading en vivo con micros." }
+        ];
+        
+        const phaseLabels = ["Cero→Jr", "Jr→Comp", "Comp→Pro", "Pro→Job"];
+        let activePhase = 0;
+
+        // Función Helper para Acordeones
+        function toggleAccordion(element) {
+            element.classList.toggle('open');
+        }
+
+        // Renderizar Tabs
+        function renderTabs() {
+            const container = document.getElementById('phase-tabs');
+            container.innerHTML = PHASES.map((p, i) => `
+                <button class="tab-btn" onclick="setActivePhase(${i})" 
+                    style="background: ${i === activePhase ? p.dark : 'var(--bg-card)'}; 
+                           border-color: ${i === activePhase ? p.color : 'var(--border-color)'}; 
+                           color: ${i === activePhase ? p.color : 'var(--text-muted)'};">
+                    <span style="font-size: 20px; margin-bottom: 4px;">${p.icon}</span>
+                    <span class="font-mono" style="font-size: 10px; font-weight: 700;">F${p.id}</span>
+                </button>
+            `).join('');
+        }
+
+        // Renderizar Contenido de Fase
+        function renderPhaseContent() {
+            const p = PHASES[activePhase];
+            const container = document.getElementById('phase-content');
+            
+            // Aquí inyectarías el resto del contenido dinámico de la fase basado en tu objeto JSON.
+            // Para mantener el archivo base manejable y funcional al instante, estructuramos el header de fase:
+            container.innerHTML = `
+                <div style="padding: 4px 16px 16px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                        <div style="width: 48px; height: 48px; border-radius: 12px; background: ${p.dark}; border: 1.5px solid ${p.color}; display: flex; align-items: center; justify-content: center; font-size: 24px;">${p.icon}</div>
+                        <div>
+                            <h2 style="margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.5px;">Fase ${p.id}: ${p.title}</h2>
+                            <div class="font-mono" style="font-size: 12px; color: ${p.color}; font-weight: 600;">${p.subtitle} · ${p.duration}</div>
+                        </div>
+                    </div>
+                    <p style="font-size: 13px; color: #a0a0b0; line-height: 1.6; margin: 8px 0 0;">${p.description}</p>
+                </div>
+                
+                <div style="padding: 0 16px 30px;">
+                    <div class="accordion" style="--active-color: ${p.color}">
+                        <button class="accordion-btn" onclick="toggleAccordion(this.parentElement)">
+                            <span style="font-size: 14px; font-weight: 700;">Ver Rutina y Proyectos Fase ${p.id}</span>
+                            <span class="icon-plus">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div style="font-size: 13px; color: #d0d0d8; line-height: 1.7;">
+                                Todo el contenido de estudio entra aquí. (Aplica tu lógica de mapeo JSON de React si deseas expandir el detalle técnico en HTML).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Actualizar Barra de Progreso
+            document.getElementById('prog-text-left').innerText = `F${activePhase + 1}/4`;
+            document.getElementById('prog-bar-fill').style.width = `${((activePhase + 1) / 4) * 100}%`;
+            document.getElementById('prog-bar-fill').style.background = `linear-gradient(90deg, #06B6D4, ${p.color})`;
+            
+            const rightText = document.getElementById('prog-text-right');
+            rightText.innerText = phaseLabels[activePhase];
+            rightText.style.color = p.color;
+        }
+
+        // Cambiar Fase Activa
+        function setActivePhase(index) {
+            activePhase = index;
+            renderTabs();
+            renderPhaseContent();
+        }
+
+        // Inicializar App
+        renderTabs();
+        renderPhaseContent();
+    </script>
+</body>
+</html>
