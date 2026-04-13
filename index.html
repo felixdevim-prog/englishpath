@@ -1,215 +1,419 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>English Mastery PRO</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>English Mastery Roadmap</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0A0A0F">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/felixdevim-prog/englishpath/main/english.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0A0A0F">
-<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/felixdevim-prog/englishpath/main/english.png">
+    <style>
+        :root {
+            --bg-main: #0A0A0F;
+            --bg-card: #111119;
+            --border: #1e1e2e;
+            --text-main: #e8e8ed;
+            --text-muted: #6b6b80;
+            --text-light: #a0a0b0;
+            --cyan: #06B6D4;
+            --cyan-dark: #083344;
+            --purple: #8B5CF6;
+            --purple-dark: #2E1065;
+            --amber: #F59E0B;
+            --amber-dark: #451A03;
+            --emerald: #10B981;
+            --emerald-dark: #052E16;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            background: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, sans-serif;
+            min-height: 100vh;
+            padding-bottom: 60px; /* Space for sticky footer */
+        }
 
-<style>
-body{
-  margin:0;
-  background:linear-gradient(180deg,#0A0A0F,#050507);
-  color:#e8e8ed;
-  font-family:'Inter',sans-serif;
-}
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        button { font-family: inherit; }
 
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:20px;
-}
+        /* Header */
+        .header {
+            padding: 36px 16px 28px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(180deg, #0F0F1A, #0A0A0F);
+        }
+        .header-tag { font-size: 9px; letter-spacing: 5px; color: var(--text-muted); font-weight: 700; margin-bottom: 14px; text-transform: uppercase; }
+        .header h1 { font-size: clamp(22px, 5vw, 34px); font-weight: 800; margin: 0 0 6px; line-height: 1.15; letter-spacing: -0.5px; }
+        .header p { font-size: 13px; color: var(--text-muted); margin: 8px auto 0; max-width: 420px; line-height: 1.5; }
+        
+        .tools-badges { display: flex; justify-content: center; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+        .badge { font-size: 10px; font-weight: 600; padding: 5px 12px; border-radius: 20px; background: rgba(6,182,212,.08); border: 1px solid rgba(6,182,212,.2); color: var(--cyan); }
 
-h1{
-  font-size:28px;
-  font-weight:800;
-  color:#06B6D4;
-  margin-bottom:5px;
-}
+        /* Sections */
+        .section-container { padding: 16px 16px 8px; }
+        .accordion-btn {
+            width: 100%; display: flex; justify-content: space-between; align-items: center;
+            padding: 14px 16px; background: transparent; border: none; cursor: pointer; color: var(--text-main); text-align: left;
+        }
+        .accordion-icon { font-size: 18px; transition: 0.3s; }
+        .accordion-icon.open { transform: rotate(45deg); }
 
-p{
-  color:#a0a0b0;
-}
+        /* Science Cards */
+        .science-card { background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; transition: 0.3s; margin-bottom: 8px; }
+        .science-card.open { border-color: var(--cyan); }
+        .science-content { padding: 0 14px 14px; display: none; }
+        .science-content.show { display: block; }
+        
+        /* Tabs */
+        .tabs-container { display: flex; gap: 6px; padding: 16px; overflow-x: auto; scroll-behavior: smooth; }
+        .tabs-container::-webkit-scrollbar { display: none; }
+        .tab-btn {
+            flex: 0 0 auto; display: flex; flex-direction: column; align-items: center;
+            padding: 12px 14px; border-radius: 12px; min-width: 78px;
+            background: var(--bg-card); border: 1.5px solid var(--border);
+            cursor: pointer; color: var(--text-muted); transition: 0.25s;
+        }
+        .tab-btn.active { color: var(--cyan); }
 
-.card{
-  background:rgba(255,255,255,0.03);
-  backdrop-filter: blur(12px);
-  border:1px solid rgba(255,255,255,0.05);
-  padding:18px;
-  border-radius:18px;
-  margin-bottom:14px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.4);
-  transition:0.25s;
-}
+        /* Phase Content */
+        .phase-header { padding: 4px 16px 16px; }
+        .phase-card { background: var(--bg-card); border-radius: 14px; border: 1px solid var(--border); overflow: hidden; margin-bottom: 10px; transition: 0.3s; }
+        .phase-card-content { padding: 0 16px 16px; display: none; }
+        .phase-card-content.show { display: block; }
 
-.card:hover{
-  transform:translateY(-3px);
-  border-color:#06B6D4;
-}
+        .schedule-item { display: flex; gap: 10px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+        .schedule-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        
+        .prompt-card { background: rgba(168,85,247,.06); border-left: 3px solid #a855f7; border-radius: 0 10px 10px 0; padding: 14px 16px; margin-bottom: 10px; }
+        .prompt-code { font-size: 12px; line-height: 1.65; color: #c8b4ff; background: rgba(0,0,0,.25); padding: 12px; border-radius: 8px; white-space: pre-wrap; margin-top: 6px; }
 
-h2{
-  font-size:18px;
-  margin-bottom:10px;
-}
+        /* Progress Bar */
+        .progress-bar-container {
+            position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-main);
+            border-top: 1px solid var(--border); padding: 12px 16px; display: flex; align-items: center; gap: 10px; z-index: 100;
+        }
+        .progress-track { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 2px; transition: width 0.4s, background 0.4s; }
 
-.task{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:8px;
-  border-radius:10px;
-  transition:0.2s;
-}
-
-.task:hover{
-  background:rgba(255,255,255,0.05);
-}
-
-input[type="checkbox"]{
-  width:18px;
-  height:18px;
-  accent-color:#06B6D4;
-  cursor:pointer;
-}
-
-.progress-box{
-  margin-top:10px;
-}
-
-.progress{
-  height:8px;
-  background:#1e1e2e;
-  border-radius:6px;
-  overflow:hidden;
-}
-
-.progress-bar{
-  height:100%;
-  background:linear-gradient(90deg,#06B6D4,#8B5CF6);
-  width:0%;
-  transition:0.4s;
-}
-
-button.install{
-  margin-top:20px;
-  background:linear-gradient(135deg,#06B6D4,#8B5CF6);
-  border:none;
-  padding:14px;
-  border-radius:14px;
-  color:white;
-  font-weight:700;
-  cursor:pointer;
-  width:100%;
-  font-size:15px;
-  box-shadow:0 10px 20px rgba(6,182,212,0.3);
-  transition:0.25s;
-}
-
-button.install:hover{
-  transform:scale(1.03);
-}
-
-.header{
-  margin-bottom:20px;
-}
-
-</style>
+    </style>
 </head>
 <body>
 
-<div class="container">
+    <div class="header">
+        <div class="header-tag mono">ENGLISH MASTERY ROADMAP · SCIENCE-BACKED · 2026</div>
+        <h1>A2 → <span style="color: var(--cyan)">C1</span> en 10 Meses</h1>
+        <p>Respaldado por ciencia cognitiva. Usando Busuu Premium + 4000 Essential Words + Gemini Pro + Coursera Plus.</p>
+        <div class="tools-badges mono" id="badges-container"></div>
+    </div>
 
-<div class="header">
-<h1>English Mastery</h1>
-<p>A2 → C1 roadmap inteligente</p>
-</div>
+    <div class="section-container">
+        <div class="science-card" id="science-main-card">
+            <button class="accordion-btn" onclick="toggleMainScience()">
+                <div>
+                    <div style="font-size:15px; font-weight:700;">🔬 Base Científica</div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">6 principios respaldados por investigación</div>
+                </div>
+                <span class="accordion-icon" id="science-main-icon">+</span>
+            </button>
+            <div class="science-content" id="science-main-content">
+                <div id="science-list"></div>
+            </div>
+        </div>
+    </div>
 
-<div id="phases"></div>
+    <div class="tabs-container" id="tabs-container"></div>
 
-<div class="card">
-<h2>📊 Progreso</h2>
-<div class="progress-box">
-<div class="progress"><div id="bar" class="progress-bar"></div></div>
-<p id="progressText"></p>
-</div>
-</div>
+    <div id="phase-content-area"></div>
 
-<button class="install" onclick="installApp()">📲 Instalar App</button>
+    <div class="section-container" style="padding-bottom: 30px;">
+        <div class="science-card" style="padding: 18px; border-color: var(--border);">
+            <div class="mono" style="font-size:9px; letter-spacing:3px; color:var(--text-muted); font-weight:700; margin-bottom:10px;">REGLAS DE ORO</div>
+            <div id="rules-container"></div>
+        </div>
+    </div>
 
-</div>
+    <div style="padding: 20px 16px 40px; border-top: 1px solid var(--border); text-align: center;">
+        <p style="font-size:14px; color:var(--text-light); line-height:1.7; max-width:500px; margin:0 auto;">
+            <strong style="color:var(--cyan)">4,000 palabras</strong> cubren ~90% de todo el inglés hablado y escrito. Con las herramientas que ya tienes, solo necesitas <strong style="color:var(--amber)">disciplina y consistencia</strong>.
+        </p>
+    </div>
 
-<script>
-const phasesData=[
-{title:"🧱 Fase 1: Cimientos",tasks:["Busuu diario","20 palabras","Anki","Listening","Hablar con IA"]},
-{title:"🚀 Fase 2: Despegue",tasks:["B1 Busuu","Podcasts","Conversación","Coursera","Series en inglés"]},
-{title:"⚡ Fase 3: Aceleración",tasks:["B2","Entrevistas","Writing","Podcasts avanzados","Trabajo simulado"]},
-{title:"👑 Fase 4: Dominio",tasks:["Inmersión total","Shadowing","Debates","Emails","Nivel nativo"]}
-];
+    <div class="progress-bar-container">
+        <div class="mono" style="font-size:11px; color:var(--text-muted); white-space:nowrap;" id="progress-text">FASE 1/4</div>
+        <div class="progress-track">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="mono" style="font-size:11px; font-weight:700;" id="progress-label"></div>
+    </div>
 
-let progress=JSON.parse(localStorage.getItem('progress')||"{}");
+    <script>
+        // Data Models
+        const SCIENCE = [
+            { principle: "Repetición Espaciada", source: "Ebbinghaus (1885), Pashler et al. (2007)", desc: "Revisar vocabulario en intervalos crecientes (1d→3d→7d→14d→30d) triplica la retención vs. estudiar todo de golpe.", tool: "4000 Essential Words + Anki (gratis)" },
+            { principle: "Input Comprensible (i+1)", source: "Krashen (1982), Nation (2001)", desc: "Adquieres idioma al exponerte a contenido donde entiendes 90-95%. El 5-10% nuevo se absorbe por contexto.", tool: "Busuu Premium + YouTube/Podcasts" },
+            { principle: "Retrieval Practice", source: "Roediger & Butler (2011), Carpenter (2020)", desc: "Intentar recordar activamente es 2-3x más efectivo que releer o reescuchar pasivamente.", tool: "Gemini Pro (quiz oral) + Anki" },
+            { principle: "Interleaving", source: "Lafleur (2020), CALL-EJ 2024", desc: "Mezclar tipos de práctica (vocab + grammar + listening + speaking) produce aprendizaje más profundo que practicar una skill a la vez.", tool: "Busuu (estructura mixta) + Rutina diaria" },
+            { principle: "Output Forzado", source: "Swain (1985), Output Hypothesis", desc: "Hablar y escribir te obliga a notar los gaps en tu conocimiento. Sin output, el input se queda pasivo.", tool: "Gemini Pro (conversación) + Busuu Community" },
+            { principle: "Filtro Afectivo Bajo", source: "Krashen (1982), Affective Filter", desc: "La ansiedad bloquea la adquisición. Practicar con IA elimina el miedo al juicio y baja el filtro.", tool: "Gemini Pro (sin juicio) + Busuu (comunidad)" }
+        ];
 
-function render(){
-const container=document.getElementById('phases');
-container.innerHTML='';
-let total=0,done=0;
+        const PHASES = [
+            { id: 1, title: "CIMIENTOS", subtitle: "A2 → A2+", duration: "Meses 1-2", color: "#06B6D4", darkColor: "#083344", icon: "🧱", targetVocab: "1,000-1,500 palabras", hoursPerDay: "1.5-2 hrs/día", description: "Solidificar tu base. Entender el sistema del inglés y construir vocabulario funcional.", weeklySchedule: { title: "Rutina Diaria (1.5-2 hrs)", blocks: [ { time: "30 min", activity: "Busuu Premium", detail: "1-2 lecciones del curso A2. Completar TODOS los ejercicios incluyendo speaking." }, { time: "20 min", activity: "4000 Essential Words (Book 1)", detail: "1 unidad = 20 palabras. Leer definición + oración ejemplo. Hacer los ejercicios del libro." }, { time: "15 min", activity: "Anki (Repetición Espaciada)", detail: "Crear flashcards de las 20 palabras del día. Formato: Frente = palabra. Atrás = definición EN INGLÉS + oración." }, { time: "20 min", activity: "Listening Pasivo (Input)", detail: "Podcast cortos con transcripción. Escuchar 1x sin leer, luego 1x leyendo." }, { time: "15 min", activity: "Gemini Pro (Output)", detail: "Prompt: 'Let's have a simple conversation...'. Hablar en voz alta o escribir." } ] }, milestones: [ "Semana 2: Completar Book 1 (400 palabras nuevas)", "Semana 4: Completar nivel A2 en Busuu.", "Semana 6: Empezar Book 2. Conversación de 3-5 min con Gemini.", "Semana 8: Book 2 completado. Placement test A2+ en Busuu." ], geminiPrompts: [ { label: "Conversación Guiada", prompt: "I'm learning English at A2 level. Let's practice a conversation about ordering food..." }, { label: "Vocabulary Quiz", prompt: "I just learned these 20 words... Quiz me on them." }, { label: "Grammar Detective", prompt: "I'll write 5 sentences. Find ALL my grammar mistakes..." } ], coursera: "English for Career Development (University of Pennsylvania) — gratis con Coursera Plus.", resources: [ "Anki (ankiweb.net)", "English Learning for Curious Minds Podcast", "BBC Learning English", "Youglish.com" ] },
+            { id: 2, title: "DESPEGUE", subtitle: "A2+ → B1", duration: "Meses 3-4", color: "#8B5CF6", darkColor: "#2E1065", icon: "🚀", targetVocab: "2,000-2,500 palabras", hoursPerDay: "2-2.5 hrs/día", description: "El salto más importante. Pasar de 'entiendo algo' a 'puedo comunicarme'.", weeklySchedule: { title: "Rutina Diaria (2-2.5 hrs)", blocks: [ { time: "30 min", activity: "Busuu Premium — Nivel B1", detail: "Usar la función 'Conversations' con IA de Busuu para cada lección." }, { time: "20 min", activity: "4000 Essential Words (Books 3-4)", detail: "Después de leer la historia, reescribirla con tus propias palabras." }, { time: "15 min", activity: "Anki Review", detail: "Las revisiones diarias toman ~15 min gracias al algoritmo SRS." }, { time: "25 min", activity: "Immersive Listening", detail: "Series/películas en inglés con subtítulos EN INGLÉS (nunca en español)." }, { time: "20 min", activity: "Gemini Pro — Conversación Avanzada", detail: "Simular escenarios de call center y workplace." }, { time: "20 min", activity: "Coursera", detail: "1 lección por día de 'English for Career Development'." } ] }, milestones: [ "Semana 10: Book 3 completado. 1,200 palabras acumuladas.", "Semana 12: Mantener conversación de 10 min con Gemini.", "Semana 16: Completar nivel B1 en Busuu." ], geminiPrompts: [ { label: "Simulación Call Center", prompt: "Act as a customer calling a tech support call center. I'm the agent..." }, { label: "Debate Estructurado", prompt: "Let's have a friendly debate. Topic: 'Remote work is better than office work.'" }, { label: "Storytelling Practice", prompt: "I'll tell you a story. After I finish, ask me 3 follow-up questions..." } ], coursera: "Improve Your English Communication Skills (Georgia Tech).", resources: [ "English with Lucy (YouTube)", "TED Talks con subtítulos", "Elsa Speak", "Write & Improve" ] },
+            { id: 3, title: "ACELERACIÓN", subtitle: "B1 → B2", duration: "Meses 5-7", color: "#F59E0B", darkColor: "#451A03", icon: "⚡", targetVocab: "3,000-3,500 palabras", hoursPerDay: "2-3 hrs/día", description: "De 'puedo comunicarme' a 'puedo trabajar en inglés'. Nivel para call center.", weeklySchedule: { title: "Rutina Diaria (2-3 hrs)", blocks: [ { time: "30 min", activity: "Busuu Premium — Nivel B2", detail: "Enfocarse en Business English." }, { time: "20 min", activity: "4000 Essential Words (Books 5-6)", detail: "Escribir un párrafo usando las 20 palabras." }, { time: "15 min", activity: "Anki Review + Sentence Mining", detail: "Crear tarjetas con ORACIONES completas." }, { time: "30 min", activity: "Deep Listening", detail: "Escuchar 5 min → transcribir → comparar." }, { time: "30 min", activity: "Gemini Pro — Workplace Simulation", detail: "Entrevistas, reuniones, presentaciones." }, { time: "20 min", activity: "Coursera — Especialización", detail: "Business English for Non-Native Speakers." } ] }, milestones: [ "Mes 5: Book 5 completado. Entender 85% de TED Talks.", "Mes 6: Entrevista simulada de 20 min con Gemini (7+/10).", "Mes 7: Pasar placement B2. Explicar conceptos técnicos." ], geminiPrompts: [ { label: "Entrevista de Trabajo", prompt: "Act as a hiring manager for a Data Analyst / Call Center position..." }, { label: "Meeting Simulation", prompt: "Let's simulate a team meeting. I'm the data analyst presenting results..." }, { label: "Difficult Customer", prompt: "Act as an extremely angry customer calling about a billing error..." } ], coursera: "English for the Workplace (British Council).", resources: [ "Business English Pod", "The Moth Podcast", "Grammarly", "Cambridge Write & Improve" ] },
+            { id: 4, title: "DOMINIO", subtitle: "B2 → B2+/C1", duration: "Meses 8-10", color: "#10B981", darkColor: "#052E16", icon: "👑", targetVocab: "4,000+ palabras", hoursPerDay: "2-3 hrs/día", description: "Pulir hasta nivel profesional avanzado. El inglés se convierte en tu herramienta.", weeklySchedule: { title: "Rutina Diaria (2-3 hrs)", blocks: [ { time: "30 min", activity: "Immersión Total", detail: "Consumir contenido EN INGLÉS que te interese (trading, tech, datos)." }, { time: "20 min", activity: "Anki — Mantenimiento", detail: "Agregar solo vocabulario especializado (call center, data analysis)." }, { time: "30 min", activity: "Shadowing", detail: "Escuchar un nativo hablar e IMITAR simultáneamente." }, { time: "30 min", activity: "Gemini Pro — Nivel Nativo", detail: "Pedir que NO simplifique su lenguaje." }, { time: "20 min", activity: "Escritura Profesional", detail: "Escribir emails, reportes, mensajes de Slack." }, { time: "20 min", activity: "Coursera — Capstone", detail: "Tomar notas EN INGLÉS. Participar en foros." } ] }, milestones: [ "Mes 8: Entender 95%+ de conversaciones profesionales.", "Mes 9: Pasar mock interview (8+/10). Escribir emails profesionales.", "Mes 10: Aplicar a posiciones bilingües/remotas." ], geminiPrompts: [ { label: "Conversación Nivel Nativo", prompt: "Let's have a natural conversation about data analysis. Don't simplify..." }, { label: "Impromptu Speaking", prompt: "Give me a random professional topic. I have 30 seconds to think..." }, { label: "Accent & Pronunciation", prompt: "Help me with marked stressed syllables, rhythm pattern, tongue twisters..." } ], coursera: "Academic English: Writing Specialization. Data Analysis EN INGLÉS.", resources: [ "EF SET (test gratuito)", "Shadowing practice", "Unirse a comunidades r/EnglishLearning" ] }
+        ];
 
-phasesData.forEach((phase,i)=>{
-const div=document.createElement('div');
-div.className='card';
+        let activePhase = 0;
+        let isMainScienceOpen = true;
 
-div.innerHTML=`<h2>${phase.title}</h2>`;
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            renderBadges();
+            renderScience();
+            renderTabs();
+            renderRules();
+            updateView();
+            registerPWA();
+        });
 
-phase.tasks.forEach((t,j)=>{
-const id=`p${i}_${j}`;
-if(progress[id]) done++;
-total++;
+        // Components Render
+        function renderBadges() {
+            const container = document.getElementById('badges-container');
+            ["Busuu Premium", "4000 Words", "Gemini Pro", "Coursera+", "Anki"].forEach(t => {
+                container.innerHTML += `<span class="badge">${t}</span>`;
+            });
+        }
 
-const row=document.createElement('div');
-row.className='task';
-row.innerHTML=`
-<input type="checkbox" ${progress[id]?"checked":""} onclick="toggle('${id}')">
-<span>${t}</span>`;
+        function toggleMainScience() {
+            isMainScienceOpen = !isMainScienceOpen;
+            document.getElementById('science-main-content').classList.toggle('show');
+            document.getElementById('science-main-icon').classList.toggle('open');
+            document.getElementById('science-main-card').classList.toggle('open');
+        }
 
-div.appendChild(row);
-});
+        function toggleSubScience(index) {
+            const content = document.getElementById(`science-sub-${index}`);
+            const icon = document.getElementById(`science-icon-${index}`);
+            const card = document.getElementById(`science-card-${index}`);
+            content.classList.toggle('show');
+            icon.classList.toggle('open');
+            card.classList.toggle('open');
+        }
 
-container.appendChild(div);
-});
+        function renderScience() {
+            const container = document.getElementById('science-list');
+            container.innerHTML = SCIENCE.map((s, i) => `
+                <div class="science-card" id="science-card-${i}" style="border-color: var(--border); background: #0A0A0F;">
+                    <button class="accordion-btn" onclick="toggleSubScience(${i})" style="padding: 12px 14px;">
+                        <div>
+                            <div style="font-size:14px; font-weight:700;">${s.principle}</div>
+                            <div class="mono" style="font-size:10px; color:var(--cyan); margin-top:2px;">${s.source}</div>
+                        </div>
+                        <span class="accordion-icon" id="science-icon-${i}" style="color:var(--cyan);">+</span>
+                    </button>
+                    <div class="science-content" id="science-sub-${i}">
+                        <p style="font-size:13px; color:var(--text-light); line-height:1.6; margin-bottom:8px;">${s.desc}</p>
+                        <div class="mono" style="font-size:11px; color:var(--amber); background:rgba(245,158,11,.08); padding:8px 10px; border-radius:8px;">
+                            🛠 ${s.tool}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            if(isMainScienceOpen) {
+                document.getElementById('science-main-content').classList.add('show');
+                document.getElementById('science-main-icon').classList.add('open');
+                document.getElementById('science-main-card').classList.add('open');
+            }
+        }
 
-let percent=Math.round((done/total)*100)||0;
-document.getElementById('bar').style.width=percent+'%';
-document.getElementById('progressText').innerText=percent+"% completado";
-}
+        function renderTabs() {
+            const container = document.getElementById('tabs-container');
+            container.innerHTML = PHASES.map((p, i) => `
+                <button class="tab-btn ${i === activePhase ? 'active' : ''}" 
+                        style="${i === activePhase ? `background:${p.darkColor}; border-color:${p.color}; color:${p.color};` : ''}"
+                        onclick="setPhase(${i})">
+                    <span style="font-size:20px; margin-bottom:4px;">${p.icon}</span>
+                    <span class="mono" style="font-size:10px; font-weight:700;">F${p.id}</span>
+                </button>
+            `).join('');
+        }
 
-function toggle(id){
-progress[id]=!progress[id];
-localStorage.setItem('progress',JSON.stringify(progress));
-render();
-}
+        function setPhase(index) {
+            activePhase = index;
+            renderTabs();
+            updateView();
+        }
 
-render();
+        function togglePhaseSection(id, color) {
+            const content = document.getElementById(`phase-sec-${id}`);
+            const icon = document.getElementById(`phase-icon-${id}`);
+            const card = document.getElementById(`phase-card-${id}`);
+            const isOpen = content.classList.contains('show');
+            
+            if(isOpen) {
+                content.classList.remove('show');
+                icon.classList.remove('open');
+                card.style.borderColor = "var(--border)";
+            } else {
+                content.classList.add('show');
+                icon.classList.add('open');
+                card.style.borderColor = color;
+            }
+        }
 
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt',e=>{
-e.preventDefault();
-deferredPrompt=e;
-});
+        function updateView() {
+            const p = PHASES[activePhase];
+            const area = document.getElementById('phase-content-area');
+            
+            // Header
+            let html = `
+                <div class="phase-header">
+                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+                        <div style="width:48px; height:48px; border-radius:12px; background:${p.darkColor}; border:1.5px solid ${p.color}; display:flex; align-items:center; justify-content:center; font-size:24px;">${p.icon}</div>
+                        <div>
+                            <h2 style="margin:0; font-size:20px; font-weight:800; letter-spacing:-0.5px;">Fase ${p.id}: ${p.title}</h2>
+                            <div class="mono" style="font-size:12px; color:${p.color}; font-weight:600;">${p.subtitle} · ${p.duration}</div>
+                        </div>
+                    </div>
+                    <p style="font-size:13px; color:var(--text-light); line-height:1.6; margin:8px 0 0;">${p.description}</p>
+                    
+                    <div style="display:flex; gap:8px; margin-top:12px;">
+                        <div style="flex:1; background:rgba(6,182,212,.06); border:1px solid rgba(6,182,212,.15); border-radius:10px; padding:10px 12px; text-align:center;">
+                            <div class="mono" style="font-size:9px; font-weight:700; color:var(--cyan); letter-spacing:1px;">VOCAB TARGET</div>
+                            <div style="font-size:14px; font-weight:700; margin-top:4px;">${p.targetVocab}</div>
+                        </div>
+                        <div style="flex:1; background:rgba(245,158,11,.06); border:1px solid rgba(245,158,11,.15); border-radius:10px; padding:10px 12px; text-align:center;">
+                            <div class="mono" style="font-size:9px; font-weight:700; color:var(--amber); letter-spacing:1px;">DEDICACIÓN</div>
+                            <div style="font-size:14px; font-weight:700; margin-top:4px;">${p.hoursPerDay}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-container" style="padding-top:0;">
+            `;
 
-function installApp(){
-if(deferredPrompt){
-deferredPrompt.prompt();
-}
-}
+            // Helper for sections
+            const renderSec = (id, title, color, innerHTML) => `
+                <div class="phase-card" id="phase-card-${id}">
+                    <button class="accordion-btn" onclick="togglePhaseSection('${id}', '${color}')">
+                        <span style="font-size:14px; font-weight:700;">${title}</span>
+                        <span class="accordion-icon" id="phase-icon-${id}" style="color:${color};">+</span>
+                    </button>
+                    <div class="phase-card-content" id="phase-sec-${id}">
+                        ${innerHTML}
+                    </div>
+                </div>
+            `;
 
-if('serviceWorker' in navigator){
-navigator.serviceWorker.register('sw.js');
-}
-</script>
+            // Schedule
+            const scheduleHTML = p.weeklySchedule.blocks.map(b => `
+                <div class="schedule-item">
+                    <div class="mono" style="min-width:56px; font-size:11px; font-weight:700; color:${p.color}; padding-top:2px;">${b.time}</div>
+                    <div>
+                        <div style="font-size:13px; font-weight:700; margin-bottom:3px;">${b.activity}</div>
+                        <div style="font-size:12px; color:var(--text-light); line-height:1.6;">${b.detail}</div>
+                    </div>
+                </div>
+            `).join('');
+            html += renderSec('schedule', `📅 ${p.weeklySchedule.title}`, p.color, scheduleHTML);
 
+            // Prompts
+            const promptsHTML = p.geminiPrompts.map(pr => `
+                <div class="prompt-card">
+                    <div class="mono" style="font-size:9px; font-weight:700; color:#a855f7; letter-spacing:1.5px;">🤖 ${pr.label}</div>
+                    <div class="prompt-code mono">${pr.prompt}</div>
+                </div>
+            `).join('');
+            html += renderSec('prompts', '🤖 Prompts para Gemini Pro', '#A855F7', promptsHTML);
+
+            // Milestones
+            const milesHTML = p.milestones.map((m, i) => `
+                <div style="display:flex; gap:10px; margin-bottom:10px; align-items:flex-start;">
+                    <div style="min-width:22px; height:22px; border-radius:50%; border:2px solid #10b981; display:flex; align-items:center; justify-content:center; font-size:10px; color:#10b981; font-weight:700; margin-top:1px;">${i+1}</div>
+                    <div style="font-size:12.5px; color:#c0c0c8; line-height:1.6;">${m}</div>
+                </div>
+            `).join('');
+            html += renderSec('milestones', '🎯 Milestones', '#10B981', milesHTML);
+
+            // Coursera
+            const courseraHTML = `<div style="font-size:13px; color:#93c5fd; line-height:1.7; background:rgba(37,99,246,.08); padding:12px; border-radius:10px;">${p.coursera}</div>`;
+            html += renderSec('coursera', '🎓 Coursera Plus', '#2563EB', courseraHTML);
+
+            // Resources
+            const resHTML = p.resources.map(r => `
+                <div style="font-size:12px; color:#fcd34d; line-height:1.6; margin-bottom:6px; padding-left:12px; border-left:2px solid rgba(245,158,11,.3);">${r}</div>
+            `).join('');
+            html += renderSec('resources', '🔗 Recursos Gratuitos', '#F59E0B', resHTML);
+
+            html += `</div>`;
+            area.innerHTML = html;
+
+            // Auto-open first section
+            togglePhaseSection('schedule', p.color);
+
+            // Update Progress Bar
+            document.getElementById('progress-text').innerText = `FASE ${activePhase+1}/4`;
+            const progressPct = ((activePhase+1)/4)*100;
+            document.getElementById('progress-fill').style.width = `${progressPct}%`;
+            document.getElementById('progress-fill').style.background = `linear-gradient(90deg, var(--cyan), ${p.color})`;
+            document.getElementById('progress-label').innerText = ["A2→A2+","A2+→B1","B1→B2","B2→C1"][activePhase];
+            document.getElementById('progress-label').style.color = p.color;
+        }
+
+        function renderRules() {
+            const rules = [
+                { icon:"🧠", rule:"Nunca traduzcas mentalmente", detail:"Piensa imagen → palabra inglesa. No imagen → español → inglés." },
+                { icon:"📱", rule:"Cambia TODO a inglés", detail:"Teléfono, PC, Netflix, YouTube, redes. Inmersión artificial pero real." },
+                { icon:"🎯", rule:"1 unidad de 4000 Words por día", detail:"Sin excepción. 20 palabras × 200 días = 4,000 palabras." },
+                { icon:"🗣️", rule:"Habla TODOS los días", detail:"10 min mínimo con Gemini. El output es vital." },
+                { icon:"📊", rule:"Mide tu progreso", detail:"Test EF SET (gratis). Anota tu score." },
+                { icon:"🔥", rule:"Consistency > Intensity", detail:"1.5 hrs diarias × 300 días > 6 hrs sábados." }
+            ];
+            document.getElementById('rules-container').innerHTML = rules.map((r, i) => `
+                <div style="display:flex; gap:10px; margin-bottom:12px; padding-bottom:12px; border-bottom:${i<5?'1px solid var(--border)':'none'};">
+                    <span style="font-size:18px;">${r.icon}</span>
+                    <div>
+                        <div style="font-size:13px; font-weight:700;">${r.rule}</div>
+                        <div style="font-size:11.5px; color:var(--text-muted); line-height:1.5;">${r.detail}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // PWA Service Worker Registration (Dynamic inline trick for single-file PWA)
+        function registerPWA() {
+            if ('serviceWorker' in navigator) {
+                const swContent = `
+                    const CACHE_NAME = 'english-path-v1';
+                    self.addEventListener('install', (e) => {
+                        self.skipWaiting();
+                    });
+                    self.addEventListener('activate', (e) => {
+                        e.waitUntil(self.clients.claim());
+                    });
+                    self.addEventListener('fetch', (e) => {
+                        e.respondWith(fetch(e.request).catch(() => new Response('Offline Mode Active. App is still running.')));
+                    });
+                `;
+                const blob = new Blob([swContent], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                
+                navigator.serviceWorker.register(swUrl).then(() => {
+                    console.log('PWA Service Worker ready.');
+                }).catch(err => {
+                    console.log('PWA SW failed: ', err);
+                });
+            }
+        }
+    </script>
 </body>
 </html>
