@@ -1,20 +1,24 @@
 {
-  "name": "English Mastery PRO",
-  "short_name": "EnglishPRO",
+  "name": "English Mastery Roadmap",
+  "short_name": "EnglishPath",
+  "description": "Roadmap intensivo basado en ciencia para dominar el inglés de A2 a C1.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0A0A0F",
   "theme_color": "#0A0A0F",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "https://raw.githubusercontent.com/felixdevim-prog/englishpath/main/english.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "https://raw.githubusercontent.com/felixdevim-prog/englishpath/main/english.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
